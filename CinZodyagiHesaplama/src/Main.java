@@ -1,18 +1,19 @@
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        int dogumTarihi,sonuc;
+        //Doğum tarihi ve sonuç için değişkenlerimiz tanımlıyoruz.
+        int dateOfBirth,result;
 
         Scanner scanner=new Scanner(System.in);
         System.out.print("Doğum tarihinizi giriniz: ");
-
-        dogumTarihi=scanner.nextInt();
-        sonuc =dogumTarihi % 12;
-
-        switch (sonuc){
+        //Kullanıcıdan girdimizi alıyoruz.
+        dateOfBirth=scanner.nextInt();
+        //Çin zodyağı hesaplanırken kişinin doğum yılının 12 ile bölümünde kalana göre bulunur.
+        //Aldığımız girdiyi 12'ye bölüyoruz.
+        result =dateOfBirth % 12;
+        // Kalana göre switch-case döngümüz çalışacaktır.
+        switch (result){
             case 0 :
                 System.out.println("Çin zodyağı burcunuz: Maymun");
                 break;

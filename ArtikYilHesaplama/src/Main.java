@@ -1,18 +1,20 @@
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
+        //Kullanıcıdan yıl girdisi alıyoruz.
         System.out.print("Yıl giriniz: ");
-        int yil = scanner.nextInt();
+        int year = scanner.nextInt();
+        //if döngüsü ile artık yıl olup olmadığını hesaplıyoruz.
+        //Eğer şartımızı sağlıyorsa konsol ekranına 'bir artık yıldır' yazdırıyoruz.
+        if(year % 4 == 0 || year % 100 == 0 && year % 400 == 0) {
+            System.out.println(year + " bir artık yıldır.");
 
-        if(yil % 4 == 0 || yil % 100 == 0 && yil % 400 == 0) {
-            System.out.println(yil + " bir artık yıldır.");
-
-        }else {
-            System.out.println(yil + " bir artık yıl değildir.");
+        }
+        //Eğer şartımızı sağlamıyorsa 'bir artık yıl değildir' yazdırıyoruz.
+        else {
+            System.out.println(year + " bir artık yıl değildir.");
         }
     }
 }

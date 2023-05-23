@@ -1,81 +1,89 @@
 import java.util.Scanner;
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-       double mesafe,yas,normalTutar,yasIndirimi,indirimliTutar, gidisDonusIndirimi,toplamTutar;
-
-        Scanner scanner=new Scanner(System.in);
+        /*
+        Kullanıcıdan alınan değerler geçerli (mesafe ve yaş değerleri pozitif sayı, yolculuk tipi ise 1 veya 2) olmalıdır.
+        Aksi takdirde kullanıcıya "Hatalı Veri Girdiniz !" şeklinde bir uyarı verilmelidir.
+        Kişi 12 yaşından küçükse bilet fiyatı üzerinden %50 indirim uygulanır.
+        Kişi 12-24 yaşları arasında ise bilet fiyatı üzerinden %10 indirim uygulanır.
+        Kişi 65 yaşından büyük ise bilet fiyatı üzerinden %30 indirim uygulanır.
+        Kişi "Yolculuk Tipini" gidiş dönüş seçmiş ise bilet fiyatı üzerinden %20 indirim uygulanır.
+         */
+        //Değişkenlerimizi tanımlıyoruz.
+        double distance, age, normalAmount, ageDiscount, discountedAmount, roundTripDiscount, totalAmount;
+        //Kullanıcıdan girdilerimiz alıyoruz.
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Mesafeyi km türünden giriniz:");
-        mesafe=scanner.nextDouble();
+        distance = scanner.nextDouble();
         System.out.print("Yaşınızı giriniz :");
-        yas=scanner.nextDouble();
+        age = scanner.nextDouble();
         System.out.print("Yolculuk tipini giriniz (1 => Tek Yön , 2 => Gidiş Dönüş ):");
-        int yolculuktipi=scanner.nextInt();
 
-        if (yas<0 || mesafe<0){
+        //Switch-case döngümüz için int türünde değişkenimizi tanımlıyoruz ve kullanıcıdan girdimizi alıyoruz.
+        int journeyType = scanner.nextInt();
+
+        //yaş ve mesafe değişkenimiz pozitif değil negatif girilirse if döngümüz çalışacaktır.
+        if (age < 0 || distance < 0) {
             System.out.println("Hatalı Veri Girdiniz!");
             System.exit(0);
         }
-
-       switch (yolculuktipi) {
-           case 1:
-               if (yas<12){
-               normalTutar = mesafe*0.10;
-               yasIndirimi= normalTutar *0.50;
-               indirimliTutar=normalTutar-yasIndirimi;
-               System.out.println("Tutar:"+ indirimliTutar+" Tl");
-               }
-               else if(yas>12 && yas<24) {
-                   normalTutar = mesafe * 0.10;
-                   yasIndirimi = normalTutar * 0.10;
-                   indirimliTutar = normalTutar - yasIndirimi;
-                   System.out.println("Tutar:" + indirimliTutar+" Tl");
-               } else if (yas > 24 && yas<65) {
-                   normalTutar=mesafe*0.10;
-                   System.out.println("Tutar: "+ normalTutar+" Tl");
-               }
-               else if (yas>65){
-                   normalTutar = mesafe * 0.10;
-                   yasIndirimi = normalTutar * 0.30;
-                   indirimliTutar = normalTutar - yasIndirimi;
-                   System.out.println("Tutar:" + indirimliTutar+" Tl");
-               }
-               break;
-           case 2:
-               if (yas<12){
-                   normalTutar = mesafe*0.10;
-                   yasIndirimi= normalTutar *0.50;
-                   indirimliTutar=normalTutar-yasIndirimi;
-                   gidisDonusIndirimi=indirimliTutar*0.20;
-                   toplamTutar= (indirimliTutar-gidisDonusIndirimi)*2;
-                   System.out.println("Tutar:" + toplamTutar+" Tl");
-               }
-               else if(yas>12 && yas<24) {
-                   normalTutar = mesafe * 0.10;
-                   yasIndirimi = normalTutar * 0.10;
-                   indirimliTutar = normalTutar - yasIndirimi;
-                   gidisDonusIndirimi=indirimliTutar*0.20;
-                   toplamTutar= (indirimliTutar-gidisDonusIndirimi)*2;
-                   System.out.println("Tutar:" + toplamTutar+" Tl");
-               } else if (yas > 24 && yas<65) {
-                   normalTutar=mesafe*0.10;
-                   gidisDonusIndirimi=normalTutar*0.20;
-                   toplamTutar= (normalTutar-gidisDonusIndirimi)*2;
-                   System.out.println("Tutar:" + toplamTutar +" Tl");
-               }
-               else if (yas>65){
-                   normalTutar = mesafe * 0.10;
-                   yasIndirimi = normalTutar * 0.30;
-                   indirimliTutar = normalTutar - yasIndirimi;
-                   gidisDonusIndirimi=indirimliTutar*0.20;
-                   toplamTutar= (indirimliTutar-gidisDonusIndirimi)*2;
-                   System.out.println("Tutar:" + toplamTutar+" Tl");;
-               }
-               break;
-           default:
-               System.out.println("Hatalı Veri Girdiniz!");
-       }
+        //Kullanıcıdan aldığımız yolculuk tipine göre switch-case döngümüz çalışacaktır.
+        switch (journeyType) {
+            //case 1 seçeneğinde sadece gidiş türüne göre if döngüsü ile indirimler uygulanacak.
+            case 1:
+                if (age < 12) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.50;
+                    discountedAmount = normalAmount - ageDiscount;
+                    System.out.println("Tutar:" + discountedAmount + " Tl");
+                } else if (age > 12 && age < 24) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.10;
+                    discountedAmount = normalAmount - ageDiscount;
+                    System.out.println("Tutar:" + discountedAmount + " Tl");
+                } else if (age > 24 && age < 65) {
+                    normalAmount = distance * 0.10;
+                    System.out.println("Tutar: " + normalAmount + " Tl");
+                } else if (age > 65) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.30;
+                    discountedAmount = normalAmount - ageDiscount;
+                    System.out.println("Tutar:" + discountedAmount + " Tl");
+                }
+                break;
+            //case 2 seçeneğinde  gidiş-dönüş türüne göre if döngüsü ile indirimler uygulanacak.
+            case 2:
+                if (age < 12) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.50;
+                    discountedAmount = normalAmount - ageDiscount;
+                    roundTripDiscount = discountedAmount * 0.20;
+                    totalAmount = (discountedAmount - roundTripDiscount) * 2;
+                    System.out.println("Tutar:" + totalAmount + " Tl");
+                } else if (age > 12 && age < 24) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.10;
+                    discountedAmount = normalAmount - ageDiscount;
+                    roundTripDiscount = discountedAmount * 0.20;
+                    totalAmount = (discountedAmount - roundTripDiscount) * 2;
+                    System.out.println("Tutar:" + totalAmount + " Tl");
+                } else if (age > 24 && age < 65) {
+                    normalAmount = distance * 0.10;
+                    roundTripDiscount = normalAmount * 0.20;
+                    totalAmount = (normalAmount - roundTripDiscount) * 2;
+                    System.out.println("Tutar:" + totalAmount + " Tl");
+                } else if (age > 65) {
+                    normalAmount = distance * 0.10;
+                    ageDiscount = normalAmount * 0.30;
+                    discountedAmount = normalAmount - ageDiscount;
+                    roundTripDiscount = discountedAmount * 0.20;
+                    totalAmount = (discountedAmount - roundTripDiscount) * 2;
+                    System.out.println("Tutar:" + totalAmount + " Tl");
+                    ;
+                }
+                break;
+            default:
+                System.out.println("Hatalı Veri Girdiniz!");
+        }
     }
 }
