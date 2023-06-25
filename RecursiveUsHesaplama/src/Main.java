@@ -26,4 +26,3 @@ public class Main {
         //Metotumuza kullanıcıdan aldığımız girdiyi gönderiyoruz ve gelen sonucu konsol ekranına yazdırıyoruz.
         System.out.println("Sonuç: " + exponentialNumber(base,exponent));
     }
-}
